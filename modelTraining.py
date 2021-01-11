@@ -15,13 +15,11 @@ def get_train_test(train_ratio, dataPath):
     labels, _, _ = get_labels(dataPath)
     classNumber = 0
 
-    # On init avec le premier tableau pour avoir les bonnes dimensions pour la suite
     X = data = np.load(dataPath + '\\' + labels[0] + '.npy')
     Y = np.zeros(X.shape[0])
     dimension = X[0].shape
     classNumber += 1
 
-    # On ajoute le reste des fichiers numpy de nos classes
     for i, label in enumerate(labels[1:]):
         data = np.load(dataPath + '\\' + label + '.npy')
         X = np.vstack((X, data))
