@@ -17,6 +17,7 @@ def createDataDirsOrSkip():
         # download .tar.gz from Google repository
         extractDatasetFromURL('http://')
 
+
 def extractDatasetFromURL(url):
     # TODO
     return {}
@@ -24,7 +25,7 @@ def extractDatasetFromURL(url):
 
 def launchConversion(datasetPath, numpyPath, resizeImg, imgSize):
     # Each folder determines a different class.
-    # dog/" => will trigger a class of name "dog" and samples will be generated from each audio file contained in it
+    # off/" => will trigger a class of name "off" and samples will be generated from each audio file contained in it
     for soundClass in os.listdir(datasetPath):
         pathSound = datasetPath + '\\' + soundClass
         imgs = []
@@ -62,7 +63,6 @@ def launchConversion(datasetPath, numpyPath, resizeImg, imgSize):
 def main():
     createDataDirsOrSkip()
     resizeImg = True
-    # change resolution for better performances
     imgSize = (50, 50)
     launchConversion(datasetPath, numpyPath, resizeImg, imgSize)
 

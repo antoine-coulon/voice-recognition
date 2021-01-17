@@ -2,6 +2,7 @@ import pyaudio
 import wave
 import audioop
 import time
+import os
 from tqdm import tqdm
 from keras.models import load_model
 import librosa
@@ -16,9 +17,10 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 TEST_RECORD_SECONDS = 5
-RECORD_TIME = 2
+RECORD_TIME = 1
 SOUND_PATH = '.\\audiotest.wav'
 MODEL_PATH = '.\\trainedModel\\soundModel.hdf5'
+DATASET_PATH = '.\\dataset\\'
 
 
 def test_microphone():
@@ -66,8 +68,13 @@ def recordAudioSample():
                                   input=True,
                                   frames_per_buffer=CHUNK)
 
-    print("Record will start in 3s...")
-    time.sleep(3)
+    print("Record will start in 3s!")
+    print("3")
+    time.sleep(1)
+    print("2")
+    time.sleep(1)
+    print("1...")
+    time.sleep(1)
     frames = []
     for i in tqdm(range(0, int(RATE / CHUNK * RECORD_TIME)), "> Recording sample... "):
         data = stream.read(CHUNK)
@@ -90,7 +97,11 @@ def recordAudioSample():
 
 def makePredictionForRecordedAudioSample():
     soundSize = (50, 50)
-    labels = ['chat', 'chien']
+    labels = []
+
+    for label in os.listdir(DATASET_PATH):
+        labels.append(label)
+
     model = load_model(MODEL_PATH)
 
     print("\n> Processing audio sample just recorded...")
@@ -124,6 +135,7 @@ def makePredictionForRecordedAudioSample():
     maxPredict = np.argmax(prediction)
 
     # Retrieving class name labeled
+    print(maxPredict)
     word = labels[maxPredict]
     pred = prediction[0][maxPredict] * 100.
     end = time.time()
@@ -139,10 +151,10 @@ def makePredictionForRecordedAudioSample():
 
 
 def main():
-    operationalMicrophone = test_microphone()
-    if(operationalMicrophone == False):
-        print("Can't proceed to record an audio sample if micro is not working.")
-        return
+    # operationalMicrophone = test_microphone()
+    # if(operationalMicrophone == False):
+    #     print("Can't proceed to record an audio sample if micro is not working.")
+    #     return
     print("Be ready to be recorded...")
     recordAudioSample()
     print("Record finished, now lets predict!")
