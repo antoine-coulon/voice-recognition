@@ -8,6 +8,18 @@ We only extracted 6 words (there are 30 in the dataset) from the dataset to lowe
 Install Anaconda to embed all dependencies required.
 Also, install PyAudio to submit a self recorded single word audio to be predicted by the model.
 
+## Get started
+
+Using the trained model and generated Numpy arrays, you can directly use the predictSound.py script to record a voice sample.
+This sample needs to contain these trained words:
+
+- "down"
+- "off"
+- "on"
+- "stop"
+- "up"
+- "yes"
+
 ## About the dataset
 
 Google Speech Commands Dataset
@@ -15,4 +27,3 @@ Google Speech Commands Dataset
 http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz
 
 The Google Speech Commands Dataset was created by the TensorFlow and AIY teams to showcase the speech recognition example using the TensorFlow API. The dataset has 65,000 clips of one-second-long duration. Each clip contains one of the 30 different words spoken by thousands of different subjects.
-
