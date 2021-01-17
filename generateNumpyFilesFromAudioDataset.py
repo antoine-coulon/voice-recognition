@@ -6,6 +6,21 @@ import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 
+numpyPath = '.\\numpy'
+datasetPath = '.\\dataset'
+
+
+def createDataDirsOrSkip():
+    if(os.path.exists(numpyPath) == False):
+        os.mkdir(numpyPath)
+    if(os.path.exists(datasetPath) == False):
+        # download .tar.gz from Google repository
+        extractDatasetFromURL('http://')
+
+def extractDatasetFromURL(url):
+    # TODO
+    return {}
+
 
 def launchConversion(datasetPath, numpyPath, resizeImg, imgSize):
     # Each folder determines a different class.
@@ -45,8 +60,7 @@ def launchConversion(datasetPath, numpyPath, resizeImg, imgSize):
 
 
 def main():
-    numpyPath = '.\\numpy'
-    datasetPath = '.\\dataset'
+    createDataDirsOrSkip()
     resizeImg = True
     # change resolution for better performances
     imgSize = (50, 50)
